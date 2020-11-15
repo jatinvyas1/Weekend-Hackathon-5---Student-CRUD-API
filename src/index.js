@@ -16,7 +16,7 @@ app.get("/api/student", (req, res) => {
   } else {
     for (let i = 0; i < studentsArr.length; i++) {
       if (studentsArr[i].id == req.query.id) {
-        res.send(JSON.stringify(studentsArr[i]));
+        res.json(studentsArr[i]);
         return;
       }
     }
