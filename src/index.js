@@ -9,10 +9,21 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 // your code goes here
-
+console.log(studentsArr);
 app.get("/api/student", (req, res) => {
-  res.json(studentsArr);
+  if (Object.keys(req.query).length === 0) {
+    res.json(studentsArr);
+  } else {
+    for (let i = 0; i < studentsArr.length; i++) {
+      if (studentsArr[i].id == req.query.id) {
+        res.send(JSON.stringify(studentsArr[i]));
+        return;
+      }
+    }
+  }
+  res.sendStatus(404);
 });
+
 app.listen(port, () => console.log(`App listening on port ${port}!`));
 
 module.exports = app;
