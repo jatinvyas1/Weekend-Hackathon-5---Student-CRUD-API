@@ -22,9 +22,9 @@ console.log(studentsArr);
 // }
 // res.json(toReturn);
 // });
-app.get("/api/student/:id", (request, response) => {
+app.get("/api/student/:id", (req, response) => {
   //get by id
-  const id = parseInt(request.params.id);
+  const id = parseInt(req.params.id);
   console.log(id);
   if (isNaN(id)) {
     response.sendStatus(404);
@@ -32,7 +32,7 @@ app.get("/api/student/:id", (request, response) => {
     return;
   }
 
-  const student = students.find((stud) => stud.id === id);
+  const student = studentsArr.find((stud) => stud.id === id);
   if (!student) {
     response.sendStatus(404);
     return;
