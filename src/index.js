@@ -12,8 +12,10 @@ app.use(bodyParser.json());
 // your code goes here
 console.log(studentsArr);
 app.get("/api/student", (req, res) => {
+  console.log(req.query);
   if (Object.keys(req.query).length === 0) {
     res.json(studentsArr);
+    return;
   }
   const toReturn = studentsArr.find(
     (student) => student.id === parseInt(req.query.id)
