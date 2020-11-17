@@ -12,6 +12,9 @@ app.use(bodyParser.json());
 // your code goes here
 console.log(studentsArr);
 app.get("/api/student", (req, res) => {
+  if (Object.keys(req.query).length === 0) {
+    res.json(studentsArr);
+  }
   const toReturn = studentsArr.find((student) => student.id == req.query.id);
   if (!toReturn) {
     res.sendStatus(404);
