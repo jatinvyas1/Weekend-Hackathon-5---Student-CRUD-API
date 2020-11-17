@@ -14,9 +14,11 @@ console.log(studentsArr);
 app.get("/api/student", (req, res) => {
   if (Object.keys(req.query).length === 0) {
     res.json(studentsArr);
+    return;
   } else {
     const toReturn = studentsArr.find((student) => student.id == req.query.id);
     res.json(toReturn);
+    return;
   }
   res.sendStatus(404);
 });
