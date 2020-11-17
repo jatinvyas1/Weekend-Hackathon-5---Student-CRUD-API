@@ -12,15 +12,11 @@ app.use(bodyParser.json());
 // your code goes here
 console.log(studentsArr);
 app.get("/api/student", (req, res) => {
-  if (Object.keys(req.query).length === 0) {
-    res.json(studentsArr);
-    return;
-  } else {
-    const toReturn = studentsArr.find((student) => student.id == req.query.id);
-    res.json(toReturn);
-    return;
+  const toReturn = studentsArr.find((student) => student.id == req.query.id);
+  if (!toReturn) {
+    res.sendStatus(404);
   }
-  res.sendStatus(404);
+  res.json(toReturn);
 });
 
 app.post("/api/student", (req, res) => {
