@@ -40,7 +40,7 @@ app.post("/api/student", (req, res) => {
   });
   console.log(studentsArr);
   res.json({
-    id: `${idCurr}`
+    id: idCurr
   });
 });
 
