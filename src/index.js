@@ -18,6 +18,7 @@ app.get("/api/student", (req, res) => {
   const toReturn = studentsArr.find((student) => student.id == req.query.id);
   if (!toReturn) {
     res.sendStatus(404);
+    return;
   }
   res.json(toReturn);
 });
