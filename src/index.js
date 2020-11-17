@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const port = 8080;
+const { parse, stringify } = require("flatted");
 app.use(express.urlencoded());
 let studentsArr = require("./InitialData.js");
 let idCurr = studentsArr.length;
@@ -26,9 +27,14 @@ app.post("/api/student", (req, res) => {
   console.log(newStudent);
   if (!newStudent.name || !newStudent.currentClass || !newStudent.division) {
     res.sendStatus(400);
+    return;
   }
   idCurr++;
-  studentsArr.push({ id: idCurr, ...newStudent });
+  studentsArr.push({
+    id: idCurr,
+    ...newStudent,
+    currentClass: parseInt(newStudent.currentClass)
+  });
   console.log(studentsArr);
   res.json({
     id: `${idCurr}`
