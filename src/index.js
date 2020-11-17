@@ -11,32 +11,18 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 // your code goes here
 console.log(studentsArr);
-// app.get("/api/student",(req,res)=>{
-//     if(Object.keys(req.query).length === 0){
-//         res.json(studentsArr);
-//     }
-//     const toReturn = studentsArr.find(student => student.id == req.query.id);
-//     if (!toReturn){
-//     res.sendStatus(404);
-//     return;
-// }
-// res.json(toReturn);
-// });
-app.get("/api/student/:id", (req, response) => {
-  //get by id
-  const id = parseInt(req.params.id);
-  console.log(id);
-  if (isNaN(id)) {
-    response.sendStatus(404);
+app.get("/api/student", (req, res) => {
+  if (Object.keys(req.query).length === 0) {
+    res.json(studentsArr);
+  }
+  const toReturn = studentsArr.find(
+    (student) => student.id === parseInt(req.query.id)
+  );
+  if (!toReturn) {
+    res.sendStatus(404);
     return;
   }
-
-  const student = studentsArr.find((stud) => stud.id === id);
-  if (!student) {
-    response.sendStatus(404);
-    return;
-  }
-  response.send(student);
+  res.json(toReturn);
 });
 
 app.post("/api/student", (req, res) => {
