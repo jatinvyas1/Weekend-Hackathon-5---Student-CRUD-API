@@ -17,6 +17,10 @@ app.get("/api/student", (req, res) => {
     res.json(studentsArr);
     return;
   }
+  if (!isNaN(req.query.id)) {
+    res.sendStatus(404);
+    return;
+  }
   const toReturn = studentsArr.find(
     (student) => student.id === parseInt(req.query.id)
   );
