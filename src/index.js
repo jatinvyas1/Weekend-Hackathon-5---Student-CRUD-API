@@ -2,8 +2,10 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const port = 8080;
+const { parse, stringify } = require("flatted");
 app.use(express.urlencoded());
 let studentsArr = require("./InitialData.js");
+let idCurr = studentsArr.length;
 // Parse JSON bodies (as sent by API clients)
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -14,14 +16,24 @@ app.get("/api/student", (req, res) => {
   if (Object.keys(req.query).length === 0) {
     res.json(studentsArr);
   } else {
-    for (let i = 0; i < studentsArr.length; i++) {
-      if (studentsArr[i].id == req.query.id) {
-        res.json(studentsArr[i]);
-        return;
-      }
-    }
+    const toReturn = studentsArr.find((student) => student.id == req.query.id);
+    res.json(toReturn);
   }
   res.sendStatus(404);
+});
+
+app.post("/api/student", (req, res) => {
+  const newStudent = req.body;
+  console.log(newStudent);
+  if (!newStudent.name || !newStudent.currentClass || !newStudent.division) {
+    res.sendStatus(400);
+  }
+  idCurr++;
+  studentsArr.push({ id: idCurr, ...newStudent });
+  console.log(studentsArr);
+  res.json({
+    id: `${idCurr}`
+  });
 });
 
 app.listen(port, () => console.log(`App listening on port ${port}!`));
