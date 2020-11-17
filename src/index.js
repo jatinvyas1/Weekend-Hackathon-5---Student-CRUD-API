@@ -24,7 +24,7 @@ app.get("/api/student", (req, res) => {
     res.sendStatus(404);
     return;
   }
-  res.json(toReturn);
+  res.send(toReturn);
 });
 
 app.post("/api/student", (req, res) => {
