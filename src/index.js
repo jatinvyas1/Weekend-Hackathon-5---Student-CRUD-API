@@ -28,7 +28,6 @@ app.get("/api/student/:id", (req, response) => {
   console.log(id);
   if (isNaN(id)) {
     response.sendStatus(404);
-    console.log("pp");
     return;
   }
 
