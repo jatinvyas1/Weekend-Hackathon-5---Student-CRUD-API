@@ -2,7 +2,6 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const port = 8080;
-const { parse, stringify } = require("flatted");
 app.use(express.urlencoded());
 let studentsArr = require("./InitialData.js");
 let idCurr = studentsArr.length;
