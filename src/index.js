@@ -60,7 +60,11 @@ app.put("/api/student/:id",(req,res)=>{
     if(division){
         student.division = division;
     }
-    res.send(student);
+    studentsArr = studentsArr.filter((currentStudent)=>{
+        currentStudent.id !== parseInt(req.params.id);
+    })
+    studentsArr = [...studentsArr,student]
+    res.sendStatus(200);
 })
 
 app.delete("/api/student/:id",(req,res)=>{
