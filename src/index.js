@@ -43,6 +43,15 @@ app.post("/api/student",(req,res)=>{
     res.send({"id":id});
 })
 
+app.put("/api/student/:id",(req,res)=>{
+    const student = studentsArr.find((currentStudent)=>currentStudent.id === parseInt(req.params.id)) || null;
+    if (!student){
+        res.sendStatus(400);
+    }
+    const name = req.body.name || null;
+    const currentClass = req.body.currentClass || null;
+    const division = req.body.division || null;
+})
 
 
 app.listen(port, () => console.log(`App listening on port ${port}!`));
