@@ -51,6 +51,16 @@ app.put("/api/student/:id",(req,res)=>{
     const name = req.body.name || null;
     const currentClass = req.body.currentClass || null;
     const division = req.body.division || null;
+    if (!name){
+        student.name = name;
+    }
+    if(!currentClass){
+        student.currentClass = currentClass;
+    }
+    if(!division){
+        student.division = division;
+    }
+    res.send(student);
 })
 
 
