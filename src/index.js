@@ -63,6 +63,22 @@ app.put("/api/student/:id",(req,res)=>{
     res.send(student);
 })
 
+app.delete("/api/student/:id",(req,res)=>{
+    const id = parseInt(req.params.id);
+    const currentLength = studentsArr.length;
+    studentsArr = studentsArr.filter((currentStudent)=>{
+        currentStudent.id !== id
+    })
+
+    if (currentLength > studentsArr.length){
+        res.sendStatus(200);
+    }
+    res.sendStatus(404);
+    
+})
+
+
+
 
 app.listen(port, () => console.log(`App listening on port ${port}!`));
 
