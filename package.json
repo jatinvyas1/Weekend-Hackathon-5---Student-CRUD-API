@@ -1,7 +1,6 @@
 {
-  "name": "node-server-testing",
+  "name": "server-testing",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "mocha '__tests__/*.js' --reporter mochawesome --recursive  --timeout 60000 --exit"
@@ -16,5 +15,14 @@
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
     "mocha": "^8.2.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jatinvyas1/Weekend-Hackathon-5---Student-CRUD-API.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jatinvyas1/Weekend-Hackathon-5---Student-CRUD-API/issues"
+  },
+  "homepage": "https://github.com/jatinvyas1/Weekend-Hackathon-5---Student-CRUD-API#readme",
+  "description": ""
 }
