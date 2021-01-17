@@ -4,7 +4,6 @@ const bodyParser = require("body-parser");
 const port = 8080;
 app.use(express.urlencoded());
 let studentsArr = require("./InitialData.js");
-<<<<<<< HEAD
 // Parse JSON bodies (as sent by API clients)
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true}));
@@ -41,8 +40,10 @@ app.post("/api/student",(req,res)=>{
         division: division
     }
     studentsArr.push(newStudent);
-    res.send(newStudent);
+    res.send({"id":id});
 })
+
+
 
 app.listen(port, () => console.log(`App listening on port ${port}!`));
 
