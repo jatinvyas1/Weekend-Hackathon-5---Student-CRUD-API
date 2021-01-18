@@ -51,19 +51,21 @@ app.put("/api/student/:id",(req,res)=>{
     const name = req.body.name || null;
     const currentClass = req.body.currentClass || null;
     const division = req.body.division || null;
-    if (name){
-        student.name = name;
+    for(let i in studentsArr){
+        if(studentsArr[i].id === parseInt(req.params.id)){
+            if (name){
+                studentsArr[i].name = name;
+            }
+            if(currentClass){
+                studentsArr[i].currentClass = currentClass;
+            }
+            if(division){
+                studentsArr[i].division = division;
+            }
+            break;
+        }
     }
-    if(currentClass){
-        student.currentClass = currentClass;
-    }
-    if(division){
-        student.division = division;
-    }
-    studentsArr = studentsArr.filter((currentStudent)=>{
-        currentStudent.id !== parseInt(req.params.id);
-    })
-    studentsArr = [...studentsArr,student]
+    console.log(studentsArr);
     res.sendStatus(200);
 })
 
