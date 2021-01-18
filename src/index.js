@@ -62,10 +62,12 @@ app.put("/api/student/:id",(req,res)=>{
             if(division){
                 studentsArr[i].division = division;
             }
+            res.send(studentsArr[i]);
             break;
+            
         }
     }
-    res.send(studentsArr);
+    
 })
 
 app.delete("/api/student/:id",(req,res)=>{
