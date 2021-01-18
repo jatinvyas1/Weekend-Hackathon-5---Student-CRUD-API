@@ -65,8 +65,7 @@ app.put("/api/student/:id",(req,res)=>{
             break;
         }
     }
-    console.log(studentsArr);
-    res.sendStatus(200);
+    res.send(studentsArr);
 })
 
 app.delete("/api/student/:id",(req,res)=>{
