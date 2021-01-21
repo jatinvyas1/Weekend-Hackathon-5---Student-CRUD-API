@@ -47,6 +47,7 @@ app.put("/api/student/:id",(req,res)=>{
     const student = studentsArr.find((currentStudent)=>currentStudent.id === parseInt(req.params.id)) || null;
     if (!student){
         res.sendStatus(400);
+        return;
     }
     const name = req.body.name || null;
     const currentClass = req.body.currentClass || null;
@@ -62,12 +63,20 @@ app.put("/api/student/:id",(req,res)=>{
             if(division){
                 studentsArr[i].division = division;
             }
-            res.send(studentsArr[i]);
             break;
-            
         }
     }
-    
+    const ans = {}
+    if (name){
+        ans.name = name;
+    }
+    if(currentClass){
+        ans.currentClass = currentClass;
+    }
+    if(division){
+        ans.division = division;
+    }
+    res.send(ans);
 })
 
 app.delete("/api/student/:id",(req,res)=>{
