@@ -47,7 +47,7 @@ app.put("/api/student/:id", (req,res)=>{
 
     const studentId = req.params.id;
 
-    const student = studentArray.find(el => el.id === parseInt(studentId));
+    const student = studentsArr.find(el => el.id === parseInt(studentId));
     
 
     if(!student){
@@ -73,7 +73,7 @@ app.put("/api/student/:id", (req,res)=>{
         }
     }
 
-    const studentIndex = studentArray.findIndex((el) => el.id === parseInt(studentId));
+    const studentIndex = studentsArr.findIndex((el) => el.id === parseInt(studentId));
 
     const newStudent= {
         id: studentId,
@@ -85,7 +85,7 @@ app.put("/api/student/:id", (req,res)=>{
 
     newStudent.currentClass = classStudent;
 
-    studentArray.splice(studentIndex, 1, newStudent);
+    studentsArr.splice(studentIndex, 1, newStudent);
 
     //res.setHeader(['{"content-type":"application/x-www-form-urlencoded"}']);
     res.send(newStudent.name);
