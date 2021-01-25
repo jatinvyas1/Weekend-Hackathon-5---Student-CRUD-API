@@ -43,40 +43,53 @@ app.post("/api/student",(req,res)=>{
     res.send({"id":id});
 })
 
-app.put("/api/student/:id",(req,res)=>{
-    const student = studentsArr.find((currentStudent)=>currentStudent.id === parseInt(req.params.id)) || null;
-    if (!student){
-        res.sendStatus(400);
+app.put("/api/student/:id", (req,res)=>{
+
+    const studentId = req.params.id;
+
+    const student = studentArray.find(el => el.id === parseInt(studentId));
+    
+
+    if(!student){
+        res.status(400).send();
         return;
     }
-    const name = req.body.name || null;
-    const currentClass = req.body.currentClass || null;
-    const division = req.body.division || null;
-    for(let i in studentsArr){
-        if(studentsArr[i].id === parseInt(req.params.id)){
-            if (name){
-                studentsArr[i].name = name;
-            }
-            if(currentClass){
-                studentsArr[i].currentClass = currentClass;
-            }
-            if(division){
-                studentsArr[i].division = division;
-            }
-            break;
+    else if(req.body.name){
+        if(req.body.name.length === 0){
+            res.status(400).send();
+            return; 
         }
     }
-    const ans = {}
-    if (name){
-        ans.name = name;
+    else if(req.body.currentClass){
+        if(!Number.isInteger(req.body.currentClass)){
+            res.status(400).send();
+            return; 
+        }
     }
-    if(currentClass){
-        ans.currentClass = currentClass;
+    else if(req.body.division){
+        if(!req.body.division.length === 1 || !req.body.division.match(/[A-Z]/)){
+            res.status(400).send();
+            return; 
+        }
     }
-    if(division){
-        ans.division = division;
+
+    const studentIndex = studentArray.findIndex((el) => el.id === parseInt(studentId));
+
+    const newStudent= {
+        id: studentId,
+        ...student,
+        ...req.body
     }
-    res.send(ans);
+
+    let classStudent = Number(newStudent.currentClass); 
+
+    newStudent.currentClass = classStudent;
+
+    studentArray.splice(studentIndex, 1, newStudent);
+
+    //res.setHeader(['{"content-type":"application/x-www-form-urlencoded"}']);
+    res.send(newStudent.name);
+
 })
 
 app.delete("/api/student/:id",(req,res)=>{
